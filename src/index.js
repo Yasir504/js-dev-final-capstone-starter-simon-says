@@ -15,7 +15,7 @@ let playerSequence = []; // track the player-generated sequence of pad presses
 let maxRoundCount = 0; // the max number of rounds, varies with the chosen level
 let roundCount = 0; // track the number of rounds that have been played so far
 
-const colors = ["red", "green", "blue", "yellow"];
+const COLORS = ["red", "green", "blue", "yellow"];
 
 /**
  *
@@ -64,7 +64,11 @@ const colors = ["red", "green", "blue", "yellow"];
 
 padContainer.addEventListener("click", padHandler);
 // TODO: Add an event listener `startButtonHandler()` to startButton.
-startButton.addEventListener("click", startButtonHandler);
+//startButton.addEventListener("click", startButtonHandler);//
+document.addEventListener('DOMContentLoaded', function() {
+  const startButton = document.querySelector('.js-start-button');
+  startButton.addEventListener('click', startButtonHandler);
+});
 
 /**
  * EVENT HANDLERS
@@ -85,25 +89,23 @@ startButton.addEventListener("click", startButtonHandler);
  * 5. Call `playComputerTurn()` to start the game with the computer going first.
  *
  */
+
+
 function startButtonHandler() {
-  
+ 
   const sequenceLength = setLevel();
 
-  if (typeof sequenceLength === 'string') {
-  console.log(sequenceLength);
-    return;
-  }
   roundCount++;
 
-  const startButton = document.querySelector('.start-button');
+  const startButton = document.querySelector('.js-start-button');
+ 
   startButton.classList.add('hidden');
 
-  const statusElement = document.querySelector('.status');
+  const statusElement = document.querySelector('.js-status');
   statusElement.classList.remove('hidden');
 
   playComputerTurn(sequenceLength);
 }
-
 
 /**
  * Called when one of the pads is clicked.
@@ -217,7 +219,7 @@ function getRandomItem(collection) {
  */
 
 function setText(element, text) {
-  const elementToChange = document.querySelector(element);
+  const elementToChange = document.querySelector('element');
   if (elementToChange) {
     elementToChange.textContent = text;
   }
@@ -328,12 +330,18 @@ function playComputerTurn() {
  * 2. Display a status message showing the player how many presses are left in the round
  */
 
-function playHumanTurn() {
+/*function playHumanTurn() {
   // Remove the "unclickable" class from the pad container so that each pad is clickable again
   padContainer.classList.remove("unclickable");
 
   // Display a status message showing the player how many presses are left in the round
   setText(status, `Your turn: ${maxRoundCount - roundCount + 1} presses left`);
+}*/
+
+function playHumanTurn() {
+  padContainer.classList.remove("unclickable");
+  const statusElement = document.querySelector('.js-status');
+  setText(statusElement, `Your turn: ${maxRoundCount - roundCount + 1} presses left`);
 }
 
 /**

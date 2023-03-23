@@ -91,9 +91,11 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 
 
-function startButtonHandler() {
+/*function startButtonHandler() {
  
   const sequenceLength = setLevel();
+
+  console.log(sequenceLength);
 
   roundCount++;
 
@@ -105,7 +107,22 @@ function startButtonHandler() {
   statusElement.classList.remove('hidden');
 
   playComputerTurn(sequenceLength);
-}
+}*/
+
+function startButtonHandler() {
+  
+  setLevel()
+  
+  roundCount++
+  
+  startButton.classList.add("hidden")
+  
+  statusSpan.classList.remove("hidden")
+  
+  playComputerTurn()
+  
+  return { startButton, statusSpan };
+  }
 
 /**
  * Called when one of the pads is clicked.
@@ -135,16 +152,6 @@ function padHandler(event) {
 
   return color;
 }
-
-// function activatePad(pad) {
-//   pad.classList.add("activated");
-//   pad.querySelector("audio").currentTime = 0;
-//   pad.querySelector("audio").play();
-
-//   setTimeout(() => {
-//     pad.classList.remove("activated");
-//   }, 500);
-// }
 
 /**
  * HELPER FUNCTIONS
@@ -272,6 +279,7 @@ function activatePads(sequence) {
   });
 }
 
+
 /**
  * Allows the computer to play its turn.
  *
@@ -307,16 +315,18 @@ function playComputerTurn() {
   setText(heading, `Round ${roundCount} of ${maxRoundCount}`);
   
   // 4. Add a randomly selected color to the computerSequence array
-  const randomColor = colors[Math.floor(Math.random() * colors.length)];
-  computerSequence.push(randomColor);
+ /* const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  computerSequence.push(randomColor);*/
+
+  computerSequence.push(getRandomItem(["red", "green", "blue", "yellow"]))
   
   // 5. Call activatePads() to light up each pad in the sequence
   activatePads(computerSequence);
   
   // 6. Calculate when the computer will be done with the sequence
-  const totalDuration = roundCount * 600;
-  setTimeout(() => playHumanTurn(roundCount), totalDuration + 1000);
 
+setTimeout(playHumanTurn, roundCount * 600 + 1000);
+  
 }
 
 /**

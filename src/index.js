@@ -12,7 +12,7 @@
  */
 let computerSequence = []; 
 let playerSequence = []; 
-let maxRoundCount = 0;  
+let maxRoundCount = 8;  
 let roundCount = 0; 
 
 const colors = ["red", "green", "blue", "yellow"];
@@ -225,22 +225,9 @@ function setText(element, text) {
  * 4. After 500ms, remove the `"activated"` class from the pad
  */
 
-/*function activatePad(color) {
-  const pad = pads.find(pad => pad.color === color);
-
-  pad.selector.classList.add("activated");
-  pad.sound.play();
-
-  setTimeout(() => {
-    pad.selector.classList.remove("activated");
-  }, 500);
-}*/
-
 function activatePad(color) {
   const pad = pads.find((pad) => pad.color === color);
   pad.selector.classList.add("activated");
-  //const sound = document.querySelector(`#${color}Sound`);//
-  //sound.currentTime = 0;//
   pad.sound.play();
   setTimeout(() => {
     pad.selector.classList.remove("activated");

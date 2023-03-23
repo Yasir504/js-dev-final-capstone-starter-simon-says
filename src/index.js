@@ -238,16 +238,13 @@ function setText(element, text) {
  */
 
 function activatePad(color) {
-  const pad = pads.find(pad => pad.dataset.color === color);
+  const pad = pads.find(pad => pad.color === color);
 
-  pad.classList.add("activated");
-
-  const sound = document.getElementByCLass(`js-pad-${color}`);
-  sound.currentTime = 0;
-  sound.play();
+  pad.selector.classList.add("activated");
+  pad.sound.play();
 
   setTimeout(() => {
-    pad.classList.remove("activated");
+    pad.selector.classList.remove("activated");
   }, 500);
 }
 

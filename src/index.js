@@ -5,7 +5,8 @@
  const startButton = document.querySelector(".js-start-button");
  const statusSpan = document.querySelector('.js-status'); 
  const heading = document.querySelector('h1'); 
- const padContainer = document.querySelector('.pad-container'); 
+ const padContainer = document.querySelector('.js-pad-container');
+ const difficultyContainer = document.querySelector('.js-difficulty');
 
 /**
  * VARIABLES
@@ -64,11 +65,11 @@ const colors = ["red", "green", "blue", "yellow"];
 
 padContainer.addEventListener("click", padHandler);
 // TODO: Add an event listener `startButtonHandler()` to startButton.
-//startButton.addEventListener("click", startButtonHandler);//
-document.addEventListener('DOMContentLoaded', function() {
+startButton.addEventListener("click", startButtonHandler);
+/*document.addEventListener('DOMContentLoaded', function() {
   const startButton = document.querySelector('.js-start-button');
   startButton.addEventListener('click', startButtonHandler);
-});
+});*/
 
 /**
  * EVENT HANDLERS
@@ -99,6 +100,8 @@ function startButtonHandler() {
   startButton.classList.add("hidden")
   
   statusSpan.classList.remove("hidden")
+
+  difficultyContainer.classList.add('hidden');
   
   playComputerTurn()
   

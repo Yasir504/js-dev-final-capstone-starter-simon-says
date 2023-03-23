@@ -90,25 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
  *
  */
 
-
-/*function startButtonHandler() {
- 
-  const sequenceLength = setLevel();
-
-  console.log(sequenceLength);
-
-  roundCount++;
-
-  const startButton = document.querySelector('.js-start-button');
-  console.log(startButton);
-  startButton.classList.add('hidden');
-
-  const statusElement = document.querySelector('.js-status');
-  statusElement.classList.remove('hidden');
-
-  playComputerTurn(sequenceLength);
-}*/
-
 function startButtonHandler() {
   
   setLevel()
@@ -178,7 +159,7 @@ function padHandler(event) {
  * setLevel(8) //> returns "Please enter level 1, 2, 3, or 4";
  *
  */
-function setLevel(level) {
+function setLevel(level=1) {
   let sequenceLength;
   switch (level) {
     case 1:
@@ -244,12 +225,23 @@ function setText(element, text) {
  * 4. After 500ms, remove the `"activated"` class from the pad
  */
 
-function activatePad(color) {
+/*function activatePad(color) {
   const pad = pads.find(pad => pad.color === color);
 
   pad.selector.classList.add("activated");
   pad.sound.play();
 
+  setTimeout(() => {
+    pad.selector.classList.remove("activated");
+  }, 500);
+}*/
+
+function activatePad(color) {
+  const pad = pads.find((pad) => pad.color === color);
+  pad.selector.classList.add("activated");
+  //const sound = document.querySelector(`#${color}Sound`);//
+  //sound.currentTime = 0;//
+  pad.sound.play();
   setTimeout(() => {
     pad.selector.classList.remove("activated");
   }, 500);
@@ -305,27 +297,18 @@ function activatePads(sequence) {
  */
 
 function playComputerTurn() {
-  // 1. Add the "unclickable" class to padContainer
+  
   padContainer.classList.add("unclickable");
-  
-  // 2. Set the status message to "The computer's turn..."
-  setText(statusSpan, "The computer's turn...");
-  
-  // 3. Set the heading to display the current round count
-  setText(heading, `Round ${roundCount} of ${maxRoundCount}`);
-  
-  // 4. Add a randomly selected color to the computerSequence array
- /* const randomColor = colors[Math.floor(Math.random() * colors.length)];
-  computerSequence.push(randomColor);*/
 
-  computerSequence.push(getRandomItem(["red", "green", "blue", "yellow"]))
-  
-  // 5. Call activatePads() to light up each pad in the sequence
+  statusSpan.innerHTML = "The computer's turn...";
+
+  heading.innerHTML = " Round " + roundCount + " of " + maxRoundCount;
+
+  computerSequence.push(getRandomItem(pads).color);
+
   activatePads(computerSequence);
-  
-  // 6. Calculate when the computer will be done with the sequence
 
-setTimeout(playHumanTurn, roundCount * 600 + 1000);
+  setTimeout(() => playHumanTurn(roundCount), roundCount * 600 + 1000);
   
 }
 

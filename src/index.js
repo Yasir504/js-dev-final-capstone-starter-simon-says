@@ -6,7 +6,6 @@
  const statusSpan = document.querySelector('.js-status'); 
  const heading = document.querySelector('h1'); 
  const padContainer = document.querySelector('.js-pad-container');
-
  const winSound = new Audio("./assets/simon-says-sound-win.mp3");
 /**
  * VARIABLES
@@ -161,20 +160,25 @@ function padHandler(event) {
  *
  */
 
-function setLevel(level=1) {
+function setLevel(level) {
   let sequenceLength;
+  level = 1
   switch (level) {
     case 1:
       sequenceLength = 8;
+      level ++
       break;
     case 2:
       sequenceLength = 14;
+      level ++
       break;
     case 3:
       sequenceLength = 20;
+      level ++
       break;
     case 4:
       sequenceLength = 31;
+      level ++
       break;
     default:
       return 'Invalid level. Please choose a level between 1 and 4.';
@@ -208,10 +212,11 @@ function getRandomItem(collection) {
  */
 
 function setText(element, text) {
-  const elementToChange = document.querySelector('element');
+  const elementToChange = document.querySelector('.js-status');
   if (elementToChange) {
     elementToChange.textContent = text;
   }
+  return elementToChange
 }
 
 
@@ -299,7 +304,7 @@ function playComputerTurn() {
 
   activatePads(computerSequence);
 
-  setTimeout(() => playHumanTurn(roundCount), roundCount * 600 + 1000);
+  setTimeout(() => playHumanTurn(), roundCount * 600 + 1000);
   
 }
 
@@ -348,8 +353,8 @@ function playHumanTurn() {
 
 function checkPress(color) {
   playerSequence.push(color);
-  const index = playerSequence.length - 1;
-  const remainingPresses = computerSequence.length - playerSequence.length;
+  let index = playerSequence.length - 1;
+  let remainingPresses = computerSequence.length - playerSequence.length;
   setText(`You have ${remainingPresses} presses left.`);
   
   if (computerSequence[index] !== playerSequence[index]) {
@@ -357,9 +362,9 @@ function checkPress(color) {
     return;
   }
   
-  if (remainingPresses === 0) {
+   if (remainingPresses === 0) {
     checkRound();
-  }
+   }
 }
 
 /**
@@ -378,13 +383,13 @@ function checkPress(color) {
  */
 
 function checkRound() {
-  if (playerSequence.length === maxRoundCount) {
+  if (playerSequence.length == maxRoundCount) {
     resetGame('Congratulations! You won!');
   } else {
     roundCount++;
     playerSequence = [];
-    setStatusText('Nice! Keep going!');
-    setTimeout(() => playComputerTurn(roundCount), 1000);
+    setText('Nice! Keep going!');
+    setTimeout(() => playComputerTurn(), 1000);
   }
 }
 

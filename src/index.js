@@ -65,10 +65,6 @@ const colors = ["red", "green", "blue", "yellow"];
 padContainer.addEventListener("click", padHandler);
 // TODO: Add an event listener `startButtonHandler()` to startButton.
 startButton.addEventListener("click", startButtonHandler);
-/*document.addEventListener('DOMContentLoaded', function() {
-  const startButton = document.querySelector('.js-start-button');
-  startButton.addEventListener('click', startButtonHandler);
-});*/
 
 /**
  * EVENT HANDLERS
@@ -304,7 +300,7 @@ function playComputerTurn() {
 
   activatePads(computerSequence);
 
-  setTimeout(() => playHumanTurn(), roundCount * 600 + 1000);
+  setTimeout(() => playHumanTurn(roundCount), roundCount * 600 + 1000);
   
 }
 
@@ -383,13 +379,14 @@ function checkPress(color) {
  */
 
 function checkRound() {
-  if (playerSequence.length == maxRoundCount) {
+  if (playerSequence.length === maxRoundCount) {
     resetGame('Congratulations! You won!');
+    return;
   } else {
     roundCount++;
     playerSequence = [];
-    setText('Nice! Keep going!');
-    setTimeout(() => playComputerTurn(), 1000);
+    statusSpan.innerHTML = 'Nice! Keep going!';
+    setTimeout(() => playComputerTurn(roundCount, 1000));
   }
 }
 

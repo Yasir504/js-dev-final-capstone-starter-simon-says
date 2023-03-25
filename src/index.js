@@ -48,13 +48,13 @@ const colors = ["red", "green", "blue", "yellow"];
   {
     color: "blue",
     selector: document.querySelector(".js-pad-blue"),
-    sound: new Audio("https://github.com/Stelvo/js-dev-final-capstone-starter-simon-says/blob/main/assets/simon-says-sound-3.mp3"),
+    sound: new Audio("https://github.com/Stelvo/js-dev-final-capstone-starter-simon-says/blob/main/assets/simon-says-sound-3.mp3?raw=true"),
   },
 
   {
     color: "yellow",
     selector: document.querySelector(".js-pad-yellow"),
-    sound: new Audio("https://github.com/Stelvo/js-dev-final-capstone-starter-simon-says/blob/main/assets/simon-says-sound-4.mp3"),
+    sound: new Audio("https://github.com/Stelvo/js-dev-final-capstone-starter-simon-says/blob/main/assets/simon-says-sound-4.mp3?raw=true"),
   }
 ];
 

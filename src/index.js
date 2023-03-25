@@ -6,7 +6,7 @@
  const statusSpan = document.querySelector('.js-status'); 
  const heading = document.querySelector('h1'); 
  const padContainer = document.querySelector('.js-pad-container');
- const winSound = new Audio("./assets/simon-says-sound-win.mp3");
+ 
 /**
  * VARIABLES
  */
@@ -406,7 +406,8 @@ function resetGame(text) {
   playerSequence = [];
   roundCount = [];
    alert(text);
-   setText(heading, "Simon Says");
+   //setText(heading, "Simon Says");//
+   heading.innerHTML = 'Simon Says...';
    startButton.classList.remove("hidden");
    statusSpan.classList.add("hidden");
    padContainer.classList.add("unclickable");

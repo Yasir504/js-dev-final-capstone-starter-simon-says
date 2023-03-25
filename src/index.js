@@ -355,7 +355,7 @@ function checkPress(color) {
   
   if (computerSequence[index] !== playerSequence[index]) {
     resetGame('Sorry, that was the wrong pad! Game over.');
-    return;
+  
   }
   
    if (remainingPresses === 0) {
@@ -386,7 +386,7 @@ function checkRound() {
     roundCount++;
     playerSequence = [];
     statusSpan.innerHTML = 'Nice! Keep going!';
-    setTimeout(() => playComputerTurn(roundCount, 1000));
+    setTimeout(() => playComputerTurn(roundCount), 1000);
   }
 }
 
@@ -404,7 +404,7 @@ function checkRound() {
 function resetGame(text) {
   computerSequence = [];
   playerSequence = [];
-  roundCount = 0;
+  roundCount = [];
    alert(text);
    setText(heading, "Simon Says");
    startButton.classList.remove("hidden");
